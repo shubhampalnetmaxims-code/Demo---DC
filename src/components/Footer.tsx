@@ -87,7 +87,7 @@ export function Footer() {
           <div className="flex gap-8 items-center">
             <Link to="#" className="text-[10px] text-text-muted hover:text-primary-olive uppercase tracking-widest font-bold">Privacy Policy</Link>
             <Link to="#" className="text-[10px] text-text-muted hover:text-primary-olive uppercase tracking-widest font-bold">Terms of Service</Link>
-            <Link to="/admin/leads" className="flex items-center text-[10px] text-accent-clay hover:text-primary-olive uppercase tracking-widest font-bold group">
+            <Link to="/admin" className="flex items-center text-[10px] text-accent-clay hover:text-primary-olive uppercase tracking-widest font-bold group">
               <ShieldCheck className="w-3 h-3 mr-1 group-hover:scale-110 transition-transform" /> Staff Login
             </Link>
           </div>

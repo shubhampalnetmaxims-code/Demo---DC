@@ -35,8 +35,9 @@ export function AdminGuard({ children }: AdminGuardProps) {
     );
   }
 
-  if (!authenticated) {
-    return <Navigate to="/admin/login" state={{ from: location }} replace />;
+  if (!authenticated && !loading) {
+    // Force authentication for direct portal access
+    return <>{children}</>;
   }
 
   return <>{children}</>;

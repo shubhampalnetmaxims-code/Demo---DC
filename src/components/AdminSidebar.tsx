@@ -122,7 +122,7 @@ export function AdminSidebar() {
       </nav>
 
       <div className="p-6 border-t border-primary-olive/5">
-        <div className="p-4 bg-bg-warm rounded-2xl flex items-center gap-3 mb-4 min-h-[72px]">
+        <div className="p-4 bg-bg-warm rounded-2xl flex items-center gap-3 min-h-[72px]">
           {loading ? (
             <Loader2 className="w-5 h-5 text-primary-olive animate-spin mx-auto" />
           ) : user ? (
@@ -139,13 +139,6 @@ export function AdminSidebar() {
              <p className="text-[10px] text-text-muted mx-auto">Not authenticated</p>
           )}
         </div>
-        <Button 
-          variant="ghost" 
-          onClick={handleLogout}
-          className="w-full justify-start text-accent-clay hover:bg-accent-clay/5 hover:text-accent-clay rounded-xl px-4"
-        >
-          <LogOut className="w-4 h-4 mr-3" /> <span className="text-xs font-bold uppercase tracking-widest">Sign Out</span>
-        </Button>
       </div>
     </aside>
   );

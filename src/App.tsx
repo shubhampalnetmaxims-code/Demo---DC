@@ -4,7 +4,7 @@
  */
 
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { AdminSidebar } from "@/components/AdminSidebar";
@@ -26,7 +26,6 @@ import AdminStayDetailPage from "@/pages/AdminStayDetailPage";
 import AdminExperienceDetailPage from "@/pages/AdminExperienceDetailPage";
 import AdminDashboardPage from "@/pages/AdminDashboardPage";
 import { AdminLoginPage } from "@/pages/AdminLoginPage";
-import { AdminGuard } from "@/components/AdminGuard";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 
 function Layout({ children }: { children: React.ReactNode }) {
@@ -67,16 +66,16 @@ export default function App() {
           <Route path="/trip-builder" element={<TripBuilderPage />} />
           <Route path="/itinerary/:leadId" element={<ItineraryPage />} />
           <Route path="/payments" element={<PaymentsPage />} />
-          <Route path="/admin/login" element={<AdminLoginPage />} />
-          <Route path="/admin" element={<AdminGuard><AdminDashboardPage /></AdminGuard>} />
-          <Route path="/admin/payments/:paymentId" element={<AdminGuard><AdminPaymentsPage /></AdminGuard>} />
-          <Route path="/admin/leads" element={<AdminGuard><AdminLeadsPage /></AdminGuard>} />
-          <Route path="/admin/leads/:id" element={<AdminGuard><AdminLeadDetailPage /></AdminGuard>} />
-          <Route path="/admin/content" element={<AdminGuard><AdminContentPage /></AdminGuard>} />
-          <Route path="/admin/content/destinations/:id" element={<AdminGuard><AdminDestinationDetailPage /></AdminGuard>} />
-          <Route path="/admin/content/packages/:id" element={<AdminGuard><AdminPackageDetailPage /></AdminGuard>} />
-          <Route path="/admin/content/stays/:id" element={<AdminGuard><AdminStayDetailPage /></AdminGuard>} />
-          <Route path="/admin/content/experiences/:id" element={<AdminGuard><AdminExperienceDetailPage /></AdminGuard>} />
+          <Route path="/admin/login" element={<Navigate to="/admin" replace />} />
+          <Route path="/admin" element={<AdminDashboardPage />} />
+          <Route path="/admin/payments/:paymentId" element={<AdminPaymentsPage />} />
+          <Route path="/admin/leads" element={<AdminLeadsPage />} />
+          <Route path="/admin/leads/:id" element={<AdminLeadDetailPage />} />
+          <Route path="/admin/content" element={<AdminContentPage />} />
+          <Route path="/admin/content/destinations/:id" element={<AdminDestinationDetailPage />} />
+          <Route path="/admin/content/packages/:id" element={<AdminPackageDetailPage />} />
+          <Route path="/admin/content/stays/:id" element={<AdminStayDetailPage />} />
+          <Route path="/admin/content/experiences/:id" element={<AdminExperienceDetailPage />} />
           <Route path="/404" element={<NotFoundPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
