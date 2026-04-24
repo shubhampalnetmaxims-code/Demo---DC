@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
+import { staticDestinations } from "@/lib/data";
 
 export function HomePage() {
   const [featured, setFeatured] = useState<any[]>([]);
@@ -18,9 +19,21 @@ export function HomePage() {
             name: d.name,
             image: d.image || d.heroImage
           })));
+        } else {
+          // Fallback if API returns error
+          setFeatured(staticDestinations.map(d => ({
+            id: d.id,
+            name: d.name,
+            image: d.heroImage
+          })));
         }
       } catch (err) {
-        console.error("Failed to fetch destinations:", err);
+        console.warn("API not reachable, using static fallback:", err);
+        setFeatured(staticDestinations.map(d => ({
+          id: d.id,
+          name: d.name,
+          image: d.heroImage
+        })));
       } finally {
         setLoading(false);
       }

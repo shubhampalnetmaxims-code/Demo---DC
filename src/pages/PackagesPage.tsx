@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
+import { staticPackages } from "@/lib/data";
 
 export function PackagesPage() {
   const [packages, setPackages] = useState<any[]>([]);
@@ -34,9 +35,18 @@ export function PackagesPage() {
             name: p.name || p.title,
             highlights: p.highlights || ["Luxury Accommodation", "Private Guided Tours", "All Transfers Included"]
           })));
+        } else {
+          setPackages(staticPackages.map(p => ({
+            ...p,
+            highlights: ["Luxury Accommodation", "Private Guided Tours", "All Transfers Included"]
+          })));
         }
       } catch (err) {
-        console.error("Failed to fetch packages:", err);
+        console.warn("API Error, using static packages:", err);
+        setPackages(staticPackages.map(p => ({
+          ...p,
+          highlights: ["Luxury Accommodation", "Private Guided Tours", "All Transfers Included"]
+        })));
       } finally {
         setLoading(false);
       }

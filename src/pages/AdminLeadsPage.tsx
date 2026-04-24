@@ -20,7 +20,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { destinations } from "@/lib/data";
+import { staticDestinations } from "@/lib/data";
 import { cn } from "@/lib/utils";
 
 interface Lead {
@@ -359,7 +359,7 @@ export function AdminLeadsPage() {
                         onChange={(e) => setNewLead({ ...newLead, destination: e.target.value })}
                         className="w-full bg-bg-warm border border-primary-olive/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary-olive/20"
                       >
-                        {Object.values(destinations).map(d => (
+                        {staticDestinations.map(d => (
                           <option key={d.id} value={d.name}>{d.name}</option>
                         ))}
                       </select>

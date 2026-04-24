@@ -5,6 +5,7 @@ import { Highlights } from "@/components/Highlights";
 import { PackageGrid } from "@/components/PackageGrid";
 import { StayGrid } from "@/components/StayGrid";
 import { Skeleton } from "@/components/ui/skeleton";
+import { staticDestinations, staticPackages, staticStays } from "@/lib/data";
 
 export function DestinationPage() {
   const { destinationId } = useParams<{ destinationId: string }>();
@@ -33,9 +34,27 @@ export function DestinationPage() {
               info: s.info || s.description
             }))
           });
+        } else {
+          // Fallback to static data
+          const staticDest = staticDestinations.find(d => d.id === destinationId);
+          if (staticDest) {
+            setDestination({
+              ...staticDest,
+              packages: staticPackages.filter(p => p.destination === staticDest.name),
+              stays: staticStays.filter(s => s.destination === staticDest.name)
+            });
+          }
         }
       } catch (err) {
-        console.error("Failed to fetch destination:", err);
+        console.warn("API Error, using static fallback for destination:", err);
+        const staticDest = staticDestinations.find(d => d.id === destinationId);
+        if (staticDest) {
+          setDestination({
+            ...staticDest,
+            packages: staticPackages.filter(p => p.destination === staticDest.name),
+            stays: staticStays.filter(s => s.destination === staticDest.name)
+          });
+        }
       } finally {
         setLoading(false);
       }

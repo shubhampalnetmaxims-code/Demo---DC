@@ -4,6 +4,7 @@ export interface Package {
   description: string;
   price: number;
   image: string;
+  destination: string;
 }
 
 export interface Stay {
@@ -11,178 +12,190 @@ export interface Stay {
   name: string;
   info: string;
   image: string;
+  destination: string;
+}
+
+export interface Experience {
+  id: string;
+  name: string;
+  destination: string;
+  price: number;
 }
 
 export interface Destination {
   id: string;
   name: string;
   heroImage: string;
+  description: string;
   highlights: { icon: string; text: string }[];
-  packages: Package[];
-  stays: Stay[];
+  packages?: Package[];
+  stays?: Stay[];
 }
 
-export const destinations: Record<string, Destination> = {
-  "cape-town": {
+export const staticDestinations: Destination[] = [
+  {
     id: "cape-town",
     name: "Cape Town",
-    heroImage: "https://images.unsplash.com/photo-1580060839134-75a5edca2e99?auto=format&fit=crop&q=80&w=1920",
+    description: "The Mother City, where mountains meet the ocean in spectacular fashion.",
+    heroImage: "https://images.unsplash.com/photo-1580060839134-75a5edca2e99?auto=format&fit=crop&q=80",
     highlights: [
-      { icon: "Mountain", text: "Table Mountain Views" },
-      { icon: "Wine", text: "World-class Vineyards" },
-      { icon: "Waves", text: "Pristine Atlantic Beaches" },
-      { icon: "Compass", text: "Cape of Good Hope" },
-    ],
-    packages: [
-      {
-        id: "cape-city-explorer",
-        name: "City Explorer",
-        description: "A 5-day journey through the heart of the Mother City.",
-        price: 1200,
-        image: "https://images.unsplash.com/photo-1576485290814-1c72aa4bbb8e?auto=format&fit=crop&q=80&w=800",
-      },
-      {
-        id: "cape-wine-safari",
-        name: "Wine & Dine Safari",
-        description: "Taste the finest wines of Stellenbosch and Franschhoek.",
-        price: 1500,
-        image: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&q=80&w=800",
-      },
-      {
-        id: "cape-adventure",
-        name: "Coastal Adventure",
-        description: "Shark cage diving and paragliding off Signal Hill.",
-        price: 1800,
-        image: "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&q=80&w=800",
-      },
-    ],
-    stays: [
-      {
-        id: "silo-hotel",
-        name: "The Silo Hotel",
-        info: "Luxury stay in a converted grain silo at the V&A Waterfront.",
-        image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=800",
-      },
-      {
-        id: "mount-nelson",
-        name: "Belmond Mount Nelson",
-        info: "The iconic pink lady of Cape Town, offering timeless elegance.",
-        image: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&q=80&w=800",
-      },
-      {
-        id: "twelve-apostles",
-        name: "Twelve Apostles Hotel",
-        info: "Breathtaking sunset views between the mountains and the sea.",
-        image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&q=80&w=800",
-      },
-    ],
+      { icon: "Mountain", text: "Table Mountain" },
+      { icon: "Compass", text: "Cape Point" },
+      { icon: "Waves", text: "V&A Waterfront" },
+      { icon: "Map", text: "Kirstenbosch" }
+    ]
   },
-  "johannesburg": {
-    id: "johannesburg",
-    name: "Johannesburg",
-    heroImage: "https://images.unsplash.com/photo-1545153996-802497637515?auto=format&fit=crop&q=80&w=1920",
-    highlights: [
-      { icon: "History", text: "Apartheid Museum" },
-      { icon: "Music", text: "Vibrant Maboneng District" },
-      { icon: "Shopping", text: "Sandton City Luxury" },
-      { icon: "Trees", text: "World's Largest Urban Forest" },
-    ],
-    packages: [
-      {
-        id: "joburg-culture",
-        name: "Urban Culture",
-        description: "Explore the street art and history of Soweto and Maboneng.",
-        price: 900,
-        image: "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&q=80&w=800",
-      },
-      {
-        id: "joburg-gold",
-        name: "Gold Reef Experience",
-        description: "A deep dive into the gold mining history of the city.",
-        price: 1100,
-        image: "https://images.unsplash.com/photo-1534073828943-f801091bb18c?auto=format&fit=crop&q=80&w=800",
-      },
-      {
-        id: "joburg-safari-day",
-        name: "Lion Park Day Trip",
-        description: "Get up close with the kings of the jungle just outside the city.",
-        price: 1300,
-        image: "https://images.unsplash.com/photo-1546182990-dffeafbe841d?auto=format&fit=crop&q=80&w=800",
-      },
-    ],
-    stays: [
-      {
-        id: "saxon-hotel",
-        name: "Saxon Hotel & Spa",
-        info: "An oasis of luxury where Nelson Mandela stayed.",
-        image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&q=80&w=800",
-      },
-      {
-        id: "four-seasons-westcliff",
-        name: "Four Seasons Westcliff",
-        info: "Hillside retreat with panoramic views of the zoo lake.",
-        image: "https://images.unsplash.com/photo-1582719478250-c89cae4df85b?auto=format&fit=crop&q=80&w=800",
-      },
-      {
-        id: "the-winston",
-        name: "The Winston Hotel",
-        info: "Boutique elegance in the heart of Rosebank.",
-        image: "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&q=80&w=800",
-      },
-    ],
-  },
-  "botswana": {
+  {
     id: "botswana",
     name: "Botswana",
-    heroImage: "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&q=80&w=1920",
+    description: "A wilderness like no other, home to the Okavango Delta and Chobe National Park.",
+    heroImage: "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&q=80",
     highlights: [
-      { icon: "Elephant", text: "Chobe National Park" },
-      { icon: "Water", text: "Okavango Delta" },
-      { icon: "Star", text: "Makgadikgadi Salt Pans" },
-      { icon: "Camera", text: "Unrivaled Wildlife Photography" },
-    ],
-    packages: [
-      {
-        id: "delta-dream",
-        name: "Delta Dream",
-        description: "A 7-day luxury safari in the heart of the Okavango Delta.",
-        price: 4500,
-        image: "https://images.unsplash.com/photo-1523805009345-7448845a9e53?auto=format&fit=crop&q=80&w=800",
-      },
-      {
-        id: "chobe-river",
-        name: "Chobe River Cruise",
-        description: "Witness the massive elephant herds from the water.",
-        price: 3200,
-        image: "https://images.unsplash.com/photo-1535941339077-2dd1c7963098?auto=format&fit=crop&q=80&w=800",
-      },
-      {
-        id: "kalahari-stars",
-        name: "Kalahari Star Gazing",
-        description: "Sleep under the stars in the vast salt pans.",
-        price: 3800,
-        image: "https://images.unsplash.com/photo-1502134249126-9f3755a50d78?auto=format&fit=crop&q=80&w=800",
-      },
-    ],
-    stays: [
-      {
-        id: "mombo-camp",
-        name: "Mombo Camp",
-        info: "The 'Place of Plenty', renowned for its high concentration of wildlife.",
-        image: "https://images.unsplash.com/photo-1493246507139-91e8bef99c02?auto=format&fit=crop&q=80&w=800",
-      },
-      {
-        id: "sandibe-lodge",
-        name: "Sandibe Okavango Safari Lodge",
-        info: "Architectural masterpiece inspired by the pangolin.",
-        image: "https://images.unsplash.com/photo-1544124499-58912cbddaad?auto=format&fit=crop&q=80&w=800",
-      },
-      {
-        id: "jack-camp",
-        name: "Jack's Camp",
-        info: "Classic 1940s style safari camp in the Makgadikgadi.",
-        image: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&q=80&w=800",
-      },
-    ],
+      { icon: "Waves", text: "Okavango Delta" },
+      { icon: "Compass", text: "Chobe River" },
+      { icon: "Star", text: "Makgadikgadi Pans" }
+    ]
   },
-};
+  {
+    id: "johannesburg",
+    name: "Johannesburg",
+    description: "The heart of South Africa, a vibrant city of culture, history, and commerce.",
+    heroImage: "https://images.unsplash.com/photo-1549420019-35ed08bc5095?auto=format&fit=crop&q=80",
+    highlights: [
+      { icon: "History", text: "Soweto" },
+      { icon: "Info", text: "Apartheid Museum" },
+      { icon: "Music", text: "Maboneng" },
+      { icon: "Map", text: "Sandton" }
+    ]
+  },
+  {
+    id: "victoria-falls",
+    name: "Victoria Falls",
+    description: "The Smoke That Thunders. One of the Seven Natural Wonders of the World.",
+    heroImage: "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&q=80",
+    highlights: [
+      { icon: "Waves", text: "Devil's Pool" },
+      { icon: "Compass", text: "Knife Edge Bridge" },
+      { icon: "Wind", text: "Helicopter Flight" }
+    ]
+  },
+  {
+    id: "serengeti",
+    name: "Serengeti",
+    description: "Witness the Great Migration in the vast plains of Tanzania.",
+    heroImage: "https://images.unsplash.com/photo-1523805081446-99395617521a?auto=format&fit=crop&q=80",
+    highlights: [
+      { icon: "Star", text: "The Great Migration" },
+      { icon: "Waves", text: "River Crossings" },
+      { icon: "Compass", text: "Big Five Safari" }
+    ]
+  },
+  {
+    id: "kruger-np",
+    name: "Kruger National Park",
+    description: "One of Africa's largest game reserves, iconic for the Big Five sightings.",
+    heroImage: "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&q=80",
+    highlights: [
+      { icon: "Compass", text: "Big Five Safari" },
+      { icon: "Map", text: "Guided Bush Walks" },
+      { icon: "Moon", text: "Night Drives" }
+    ]
+  }
+];
+
+export const staticPackages: Package[] = [
+  {
+    id: "cape-luxury",
+    name: "Cape Luxury Escape",
+    destination: "Cape Town",
+    description: "5 days of pure luxury in the heart of Africa's most beautiful city.",
+    price: 2450,
+    image: "https://images.unsplash.com/photo-1580060839134-75a5edca2e99?auto=format&fit=crop&q=80"
+  },
+  {
+    id: "safari-adventure",
+    name: "Botswana Safari Adventure",
+    destination: "Botswana",
+    description: "7 days of wild adventure in the Okavango Delta.",
+    price: 4800,
+    image: "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&q=80"
+  },
+  {
+    id: "victoria-explorer",
+    name: "Falls Explorer",
+    destination: "Victoria Falls",
+    description: "3 days of adrenaline and beauty at the falls.",
+    price: 1200,
+    image: "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&q=80"
+  },
+  {
+    id: "migration-magic",
+    name: "Serengeti Migration",
+    destination: "Serengeti",
+    description: "Witness the greatest show on earth.",
+    price: 5500,
+    image: "https://images.unsplash.com/photo-1523805081446-99395617521a?auto=format&fit=crop&q=80"
+  },
+  {
+    id: "kruger-safari",
+    name: "Kruger Classic Safari",
+    destination: "Kruger National Park",
+    description: "4 days immersive wildlife experience in the wild.",
+    price: 1850,
+    image: "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&q=80"
+  }
+];
+
+export const staticStays: Stay[] = [
+  {
+    id: "the-silo",
+    name: "The Silo Hotel",
+    destination: "Cape Town",
+    info: "A magical hotel towering above the V&A Waterfront.",
+    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80"
+  },
+  {
+    id: "chobe-lodge",
+    name: "Chobe Game Lodge",
+    destination: "Botswana",
+    info: "Luxury safari lodge inside Chobe National Park.",
+    image: "https://images.unsplash.com/photo-1493246507139-91e8bef99c02?auto=format&fit=crop&q=80"
+  },
+  {
+    id: "victoria-hotel",
+    name: "The Victoria Falls Hotel",
+    destination: "Victoria Falls",
+    info: "Elegance and history overlooking the falls bridge.",
+    image: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&q=80"
+  },
+  {
+    id: "serengeti-camp",
+    name: "Four Seasons Serengeti",
+    destination: "Serengeti",
+    info: "Luxury in the heart of the wild.",
+    image: "https://images.unsplash.com/photo-1493246507139-91e8bef99c02?auto=format&fit=crop&q=80"
+  },
+  {
+    id: "kruger-lodge",
+    name: "Singita Ebano",
+    destination: "Kruger National Park",
+    info: "Experience the ultimate in private safari luxury.",
+    image: "https://images.unsplash.com/photo-1493246507139-91e8bef99c02?auto=format&fit=crop&q=80"
+  },
+  {
+    id: "twelve-apostles",
+    name: "Twelve Apostles Hotel",
+    destination: "Cape Town",
+    info: "Majestic views overlooking the Atlantic Ocean.",
+    image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&q=80"
+  }
+];
+
+export const staticExperiences: Experience[] = [
+  { id: "helicopter-tour", name: "Helicopter Harbour Tour", destination: "Cape Town", price: 250 },
+  { id: "safari-drive", name: "Big Five Game Drive", destination: "Botswana", price: 150 },
+  { id: "devil-pool", name: "Devil's Pool Swim", destination: "Victoria Falls", price: 110 },
+  { id: "balloon-serengeti", name: "Hot Air Balloon Safari", destination: "Serengeti", price: 599 },
+  { id: "kruger-walk", name: "Guided Wilderness Walk", destination: "Kruger National Park", price: 85 },
+  { id: "wine-tasting", name: "Private Wine Tasting", destination: "Cape Town", price: 120 }
+];

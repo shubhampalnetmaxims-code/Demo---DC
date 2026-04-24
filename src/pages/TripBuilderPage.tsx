@@ -23,6 +23,11 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { 
+  staticDestinations, 
+  staticStays, 
+  staticExperiences 
+} from "@/lib/data";
 
 // Hardcoded Options & Prices
 const TRANSPORT_OPTIONS = [
@@ -66,17 +71,28 @@ export function TripBuilderPage() {
         if (destRes.ok) {
           const dests = await destRes.json();
           setDbDestinations(dests);
+        } else {
+          setDbDestinations(staticDestinations);
         }
+
         if (staysRes.ok) {
           const stays = await staysRes.json();
           setDbStays(stays);
+        } else {
+          setDbStays(staticStays);
         }
+
         if (expRes.ok) {
           const exps = await expRes.json();
           setDbExperiences(exps);
+        } else {
+          setDbExperiences(staticExperiences);
         }
       } catch (err) {
-        console.warn("Failed to fetch builder data", err);
+        console.warn("API Error in builder, using static fallbacks:", err);
+        setDbDestinations(staticDestinations);
+        setDbStays(staticStays);
+        setDbExperiences(staticExperiences);
       }
     };
     fetchAllData();
